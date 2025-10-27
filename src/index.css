@@ -1,0 +1,31 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* Define your design tokens here */
+@theme {
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", "Fira Code", monospace;
+
+  --color-bg: #0d0d0d;
+  --color-surface: #121212;
+  --color-border: #222222;
+  --color-text: #e5e5e5;
+  --color-text-muted: #a1a1a1;
+  --color-accent: #00ff88;
+  --color-accent-hover: #00cc66;
+
+  /* optional shadow token */
+  --shadow-glow: 0 0 12px rgba(0,255,136,0.25);
+}
+
+/* Base defaults for Dark Code Studio */
+:root { color-scheme: dark; }
+
+@layer base {
+  body {
+    @apply bg-bg text-text font-mono antialiased;
+    font-family: var(--font-mono);
+  }
+  a { @apply text-accent hover:text-accent-hover transition-colors; }
+  input, textarea { @apply bg-surface text-text border border-border rounded px-3 py-2; }
+  input:focus, textarea:focus { @apply outline-none ring-1 ring-accent; }
+}
