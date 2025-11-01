@@ -1,5 +1,5 @@
-// Base URL: use .env value if defined, otherwise default to localhost:8080
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8080';
+// src/api/posts.js
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const BASE = `${API_BASE}/api/posts`;
 
@@ -23,9 +23,9 @@ async function jsonFetch(url, options = {}) {
 }
 
 export const PostsAPI = {
-  list: () => jsonFetch(`${BASE}`),                                // GET /api/posts
-  get: (id) => jsonFetch(`${BASE}/${id}`),                         // GET /api/posts/:id
-  getBySlug: (slug) => jsonFetch(`${BASE}/slug/${slug}`),          // GET /api/posts/slug/:slug ← ADD THIS
+  list: () => jsonFetch(`${BASE}`),
+  get: (id) => jsonFetch(`${BASE}/${id}`),
+  getBySlug: (slug) => jsonFetch(`${BASE}/slug/${slug}`),
   create: (body) => jsonFetch(`${BASE}`, { method: "POST", body: JSON.stringify(body) }),
   update: (id, body) => jsonFetch(`${BASE}/${id}`, { method: "PATCH", body: JSON.stringify(body) }),
   delete: (id) => jsonFetch(`${BASE}/${id}`, { method: "DELETE" }),
