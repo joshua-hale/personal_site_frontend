@@ -1,4 +1,4 @@
-// src/api/api.js
+// src/api/auth.js
 const BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8080'
 
 async function request(path, { method = 'GET', body, headers } = {}) {
@@ -16,7 +16,7 @@ async function request(path, { method = 'GET', body, headers } = {}) {
   return data
 }
 
-export const api = {
+export const AuthAPI = {
   login: (emailOrUsername, password) =>
     request('/auth/login', { method: 'POST', body: { emailOrUsername, password } }),
 
