@@ -44,12 +44,12 @@ export default function Hero() {
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen text-center bg-bg text-text">
-      <h1 className="text-3xl sm:text-5xl font-bold text-accent drop-shadow-[0_0_8px_rgba(0,255,136,0.5)]">
+      <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-accent">
         {displayed}
-        <span className={`ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>_</span>
+        <span className={`inline-block w-[0.6ch] -translate-y-px ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>▌</span>
       </h1>
       <p className="text-text-muted mt-4 text-sm sm:text-base">
-        Crafting clean code and powerful APIs.
+        Full-stack developer | Software architect | Late-night debugger
       </p>
     </section>
   )

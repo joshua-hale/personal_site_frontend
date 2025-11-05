@@ -1,5 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { contactApi } from '../api/contact';
+
+function TypedText({ text, speed = 50, className = "" }) {
+  const [shown, setShown] = useState("");
+  useEffect(() => {
+    let i = 0;
+    const id = setInterval(() => {
+      setShown(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(id);
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, speed]);
+
+  return (
+    <span className={className}>
+      {shown}
+      <span className="inline-block w-[0.6ch] -translate-y-px animate-[blink_1s_steps(2,start)_infinite]">▌</span>
+    </span>
+  );
+}
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -52,8 +72,8 @@ export default function ContactForm() {
   return (
     <div className="min-h-screen bg-bg flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-2xl">
-        <h1 className="text-4xl md:text-5xl font-mono font-bold text-accent mb-2">
-          Contact_
+        <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-accent mb-2">
+          <TypedText text="Contact" speed={75} />
         </h1>
         <p className="text-text-muted font-mono mb-8">
           Get in touch. I'll respond as soon as possible.

@@ -48,7 +48,7 @@ export default function Login() {
   return (
     <main className="min-h-[calc(100dvh-theme(spacing.24))] flex items-start md:items-center justify-center px-6 pt-16 md:pt-0">
       <div className="w-full max-w-xl">
-        <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-text mb-10">
+        <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-accent mb-10">
           <TypedText text="Login" speed={75} />
         </h1>
 

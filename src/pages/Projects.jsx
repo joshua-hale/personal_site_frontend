@@ -2,6 +2,26 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PostsAPI } from '../api/posts';
 
+function TypedText({ text, speed = 50, className = "" }) {
+  const [shown, setShown] = useState("");
+  useEffect(() => {
+    let i = 0;
+    const id = setInterval(() => {
+      setShown(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(id);
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, speed]);
+
+  return (
+    <span className={className}>
+      {shown}
+      <span className="inline-block w-[0.6ch] -translate-y-px animate-[blink_1s_steps(2,start)_infinite]">▌</span>
+    </span>
+  );
+}
+
 export default function Projects() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +33,7 @@ export default function Projects() {
 
   const fetchPosts = async () => {
     try {
-      const data = await PostsAPI.list(); // Uses your existing list() method
+      const data = await PostsAPI.list();
       setPosts(data);
     } catch (err) {
       setError(err.message);
@@ -25,7 +45,7 @@ export default function Projects() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
-        <p className="text-gray-400">Loading projects...</p>
+        <p className="text-text-muted">Loading projects...</p>
       </div>
     );
   }
@@ -40,10 +60,12 @@ export default function Projects() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
+      <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-accent mb-10 text-center">
+        <TypedText text="Projects" speed={75} />
+      </h1>
       
       {posts.length === 0 ? (
-        <p className="text-gray-400">No projects yet. Check back soon!</p>
+        <p className="text-text-muted">No projects yet. Check back soon!</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
@@ -52,7 +74,7 @@ export default function Projects() {
               to={`/projects/${post.slug}`}
               className="group"
             >
-              <div className="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-750 transition-colors">
+              <div className="bg-black overflow-hidden hover:opacity-80 transition-opacity">
                 {post.heroImage && (
                   <img 
                     src={post.heroImage} 
@@ -61,10 +83,10 @@ export default function Projects() {
                   />
                 )}
                 <div className="p-4">
-                  <h2 className="text-xl font-semibold mb-2 group-hover:text-green-400 transition-colors">
+                  <h2 className="text-xl font-semibold mb-2 text-accent">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-text-muted">
                     Updated {new Date(post.updatedAt).toLocaleDateString()}
                   </p>
                 </div>
