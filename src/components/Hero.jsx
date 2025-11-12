@@ -49,7 +49,7 @@ export default function Hero() {
         <span className={`inline-block w-[0.6ch] -translate-y-px ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>▌</span>
       </h1>
       <p className="text-text-muted mt-4 text-sm sm:text-base">
-        Full-stack developer | Software architect | Late-night debugger
+        Full-stack developer | Software architect | Late night debugger
       </p>
     </section>
   )
